@@ -2,7 +2,7 @@
 
 require_once "conexion.php";
 
-class ModeloEmpleados{
+class ModeloEmpleados {
 
     /*=============================================
 	MOSTRAR EMPLEADOS
@@ -23,8 +23,36 @@ class ModeloEmpleados{
 	GUARDAR EMPLEADOS
 	=============================================*/
 
-	static public function mdlGuardarEmpleados($tabla,$tablaEmpleadoRol,$data){
+	static public function mdlGuardarEmpleados($tabla,$tablaEmpleadoRol,$datos){
+		$datos["area_id"] = intval($datos["area_id"]);
+        // return  ($datos);
+		// die();
+
+		$stmt = (new Conexion)->conectar()->prepare("INSERT INTO $tabla(nombre,email,sexo,area_id,boletin,descripcion) VALUES (:nombre, :email,:sexo, :area_id, :boletin, :descripcion)");
+        
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
+		$stmt->bindParam(":sexo", $datos["sexo"], PDO::PARAM_STR);
+		$stmt->bindParam(":area_id", $datos["area_id"], PDO::PARAM_INT);
+		$stmt->bindParam(":boletin", $datos["boletin"], PDO::PARAM_INT);
+		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+            
+			// insertar los roles
+			// $roles = $datos["roles"];
+
+			return "ok";
+
+		}else{
+
+			return "error";
 		
+		}
+
+		$stmt = null;
+		
+
 	}
 }
 

@@ -84,7 +84,7 @@ $("#btnGuardar").click(function () {
         nombre: nombre,
         email: email,
         sexo: sexo,
-        area: area,
+        area_id: area,
         descripcion: descripcion,
         boletin: boletin,
         roles: roles
@@ -96,14 +96,14 @@ $("#btnGuardar").click(function () {
 function enviarAjax(datos){
     $.ajax({
         async:true,          
-            url: 'controladores/empleados.controlador.php',
+            url: 'ajax/empleados.ajax.php',
             type:'POST',
             data: {
                 accion: "nuevo",
                 empleado: datos
             },
             success: function(response){
-                console.log(JSON.parse(response));
+                console.log((response));
                 // console.log(JSON.parse(data,true));
             }
     });
