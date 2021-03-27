@@ -1,0 +1,32 @@
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #EDEDED;
+}
+
+.centrar{
+    margin: 0 auto;
+    max-width: 40%;
+}
+
+.centrar img{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.centrar h2{
+    margin-bottom: 20px;
+}
+
+.centrar a{
+    display: block;
+}
+
+.modal h6{
+    margin-bottom: 10px;
+    font-size: 12px;
+}
