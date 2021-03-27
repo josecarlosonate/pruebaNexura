@@ -18,6 +18,14 @@ class ModeloEmpleados{
 		$stmt = null;
 
 	}
+
+	/*=============================================
+	GUARDAR EMPLEADOS
+	=============================================*/
+
+	static public function mdlGuardarEmpleados($tabla,$tablaEmpleadoRol,$data){
+		
+	}
 }
 
 ?>

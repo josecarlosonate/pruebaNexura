@@ -79,5 +79,32 @@ $("#btnGuardar").click(function () {
         }
     });
 
-
+    // objeto de datos 
+    let objDatos = {
+        nombre: nombre,
+        email: email,
+        sexo: sexo,
+        area: area,
+        descripcion: descripcion,
+        boletin: boletin,
+        roles: roles
+    }
+    // console.log(objDatos,JSON.stringify(objDatos));
+    enviarAjax(JSON.stringify(objDatos));
 });
+
+function enviarAjax(datos){
+    $.ajax({
+        async:true,          
+            url: 'controladores/empleados.controlador.php',
+            type:'POST',
+            data: {
+                accion: "nuevo",
+                empleado: datos
+            },
+            success: function(response){
+                console.log(JSON.parse(response));
+                // console.log(JSON.parse(data,true));
+            }
+    });
+}
