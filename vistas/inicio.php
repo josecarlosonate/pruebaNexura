@@ -37,7 +37,7 @@
         <div class="card">
             <div class="card-header">
                 Listado de empleados
-                <a class="btn btn-outline-success float-right" data-toggle="modal" data-target="#Modal">Crear Nuevo Empleado</a>
+                <a class="btn btn-outline-success float-right" data-toggle="modal" data-target="#Modal"><i class="fa fa-user-plus"></i> Nuevo Empleado</a>
             </div>
             <div class="card-body">
                 <?php
@@ -107,14 +107,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Nombre completo <b class="text-danger"> *</b></span>
                             </div>
-                            <input type="text" id="nombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" id="nombre" name="nombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         <!-- email  -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Email <b class="text-danger"> *</b></span>
                             </div>
-                            <input type="email" id="email" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="email" id="email" class="form-control" name="email" aria-describedby="basic-addon1">
                         </div>
                         <!-- sexo  -->
                         <div class="input-group mb-3">
@@ -123,12 +123,12 @@
                             </div>&nbsp;&nbsp;
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="M" name="optradio">Masculino
+                                    <input type="radio" id="sexo" class="form-check-input optradio" value="M" name="sexo">Masculino
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="F" name="optradio">Femenino
+                                    <input type="radio" id="sexo" class="form-check-input optradio" value="F" name="sexo">Femenino
                                 </label>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Area <b class="text-danger"> *</b></span>
                             </div>
-                            <select class="form-control" id="sltArea">
+                            <select class="form-control" id="sltArea" name="sltArea">
                                 <?php
                                 $areas = ControladorAreas::ctrMostrarAreas();
                                 if (!$areas) {
@@ -158,12 +158,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Descripcion <b class="text-danger"> *</b></span>
                         </div>
-                        <textarea class="form-control" rows="4" id="descripcion"></textarea>
+                        <textarea class="form-control" rows="4" id="descripcion" name="descripcion"></textarea>
                         <!-- boletin  -->
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="">
-                                    <input type="radio" id="boletin" aria-label="Radio">
+                                    <input type="checkbox"  id="boletin" aria-label="Radio">
                                 </div>
                             </div>&nbsp;
                             <label for="">Desea recibir boletin informativo?</label>
@@ -180,10 +180,10 @@
                                 <p class="text-info">no hay roles registrados</p>
                                 <?php
                             } else {
-                                foreach ($areas as $key => $value) {
+                                foreach ($roles as $key => $value) {
                                 ?>
                                     <li class="list-group-item list-group-item-success">
-                                        &nbsp;<input type="checkbox" class="form-check-input" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?>
+                                        &nbsp;<input type="checkbox" id="roles" name='roles[]' class="form-check-input roles" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?>
                                     </li>
                             <?php
                                 }
