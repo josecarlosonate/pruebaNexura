@@ -99,67 +99,102 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <h6 class="text-danger">los campos marcados con * son obligatorios</h6>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Nombre completo <b class="text-danger"> *</b></span>
-                        </div>
-                        <input type="text" id="usuario" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Email <b class="text-danger"> *</b></span>
-                        </div>
-                        <input type="email" id="email" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Sexo <b class="text-danger"> *</b></span>
-                        </div>&nbsp;&nbsp;
-                        <div class="form-check-inline">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" value="M" name="optradio">Masculino
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" value="F" name="optradio">Femenino
-                            </label>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Area <b class="text-danger"> *</b></span>
-                        </div>
-                        <select class="form-control" id="sltArea">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Descripcion <b class="text-danger"> *</b></span>
-                    </div>
-                    <textarea class="form-control" rows="4" id="comment"></textarea>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="">
-                                <input type="radio" id="boletin" aria-label="Radio">
+                <form action="" id="formularioRegistro">
+                    <div class="modal-body">
+                        <h6 class="text-danger">los campos marcados con * son obligatorios</h6>
+                        <!-- nombre  -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Nombre completo <b class="text-danger"> *</b></span>
                             </div>
-                        </div>&nbsp;
-                        <label for="">Desea recibir boletin informativo?</label>
+                            <input type="text" id="nombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <!-- email  -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Email <b class="text-danger"> *</b></span>
+                            </div>
+                            <input type="email" id="email" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <!-- sexo  -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Sexo <b class="text-danger"> *</b></span>
+                            </div>&nbsp;&nbsp;
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" value="M" name="optradio">Masculino
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" value="F" name="optradio">Femenino
+                                </label>
+                            </div>
+                        </div>
+                        <!-- listado de areas  -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Area <b class="text-danger"> *</b></span>
+                            </div>
+                            <select class="form-control" id="sltArea">
+                                <?php
+                                $areas = ControladorAreas::ctrMostrarAreas();
+                                if (!$areas) {
+                                ?>
+                                    <option class="text-info" value="0">no existen areas</option>
+                                    <?php
+                                } else {
+                                    foreach ($areas as $key => $value) {
+                                    ?>
+                                        <option value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <!-- descripcion  -->
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Descripcion <b class="text-danger"> *</b></span>
+                        </div>
+                        <textarea class="form-control" rows="4" id="descripcion"></textarea>
+                        <!-- boletin  -->
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="">
+                                    <input type="radio" id="boletin" aria-label="Radio">
+                                </div>
+                            </div>&nbsp;
+                            <label for="">Desea recibir boletin informativo?</label>
+                        </div>
+                        <!-- roles  -->
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Roles <b class="text-danger"> *</b></span>
+                        </div>
+                        <ul class="list-group">
+                            <?php
+                            $roles = ControladorRoles::ctrMostrarRoles();
+                            if (!$roles) {
+                            ?>
+                                <p class="text-info">no hay roles registrados</p>
+                                <?php
+                            } else {
+                                foreach ($areas as $key => $value) {
+                                ?>
+                                    <li class="list-group-item list-group-item-success">
+                                        &nbsp;<input type="checkbox" class="form-check-input" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?>
+                                    </li>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </ul>
                     </div>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Roles <b class="text-danger"> *</b></span>
+                    <div class="modal-footer">
+                        <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Guardar</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

@@ -43,3 +43,7 @@ body{
 .iconoBorrar i{
     color: red;
 }
+
+.input-group-prepend{
+    margin-bottom: 5px;
+}

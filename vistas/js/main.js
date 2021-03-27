@@ -14,3 +14,8 @@ $("i.fa.fa-trash").click(function () {
         }
     });
 });
+
+// validar formulario 
+$("#btnGuardar").click(function () {
+
+});
