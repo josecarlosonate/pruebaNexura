@@ -9,8 +9,9 @@ class ControladorEmpleados{
 	static public function ctrMostrarEmpleados(){
 
 		$tabla = "empleados";
+		$tablaArea = "areas";
 
-		$respuesta = ModeloEmpleados::mdlMostrarEmpleados($tabla);
+		$respuesta = ModeloEmpleados::mdlMostrarEmpleados($tabla,$tablaArea);
 
 		return $respuesta;
 

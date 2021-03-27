@@ -69,10 +69,10 @@
                                         <th class="text-primary"><?php echo $value["nombre"] ?></th>
                                         <th class="text-primary"><?php echo $value["email"] ?></th>
                                         <th class="text-primary"><?php echo $value["sexo"] ?></th>
-                                        <th class="text-primary"><?php echo $value["sexo"] ?></th>
-                                        <th class="text-primary"><?php echo $value["sexo"] ?></th>
-                                        <th class="text-primary"><i class="fa fa-edit"></i></th>
-                                        <th class="text-primary"><i class="fa fa-trash"></i></th>
+                                        <th class="text-primary"><?php echo $value["area"] ?></th>
+                                        <th class="text-primary"><?php echo $value["boletin"] ?></th>
+                                        <th class="text-primary iconoEditar"><i class="fa fa-edit"></i></th>
+                                        <th class="text-primary iconoBorrar"><i class="fa fa-trash"></i></th>
                                     </tr>
                                     <?php
                                 }
