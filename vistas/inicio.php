@@ -64,17 +64,18 @@
                             <tbody>
                                 <?php
                                 foreach ($empleados as $key => $value) {
-                                    ?>
+                                ?>
                                     <tr>
                                         <th class="text-primary"><?php echo $value["nombre"] ?></th>
                                         <th class="text-primary"><?php echo $value["email"] ?></th>
                                         <th class="text-primary"><?php echo $value["sexo"] ?></th>
                                         <th class="text-primary"><?php echo $value["area"] ?></th>
-                                        <th class="text-primary"><?php echo $value["boletin"] ?></th>
+                                        <th class="text-primary"><?php echo $resultado = ($value["boletin"] == 0)  ? "NO" : "SI" ?>
+                                        </th>
                                         <th class="text-primary iconoEditar"><i class="fa fa-edit"></i></th>
                                         <th class="text-primary iconoBorrar"><i class="fa fa-trash"></i></th>
                                     </tr>
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </tbody>
@@ -174,7 +175,15 @@
 
     <script src="vistas/js/plugins/bootstrap4.min.js"></script>
 
-    <!-- <script src="vistas/js/plugins/sweetalert.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="vistas/js/plugins/jquery.validate.min.js"></script>
+
+    <!--=====================================
+    MI JAVASCRIPT
+    ======================================-->
+
+    <script src="vistas/js/main.js"></script>
 
 </body>
 
