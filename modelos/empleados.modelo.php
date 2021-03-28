@@ -9,7 +9,10 @@ class ModeloEmpleados {
 	=============================================*/
 
 	static public function mdlMostrarEmpleados($tabla,$tablaArea){
-		$stmt = (new Conexion)->conectar()->prepare("SELECT e.nombre, e.email, e.sexo, e.boletin, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id");
+		$db = new Conexion();
+		$stmt = $db->pdo->prepare("SELECT e.nombre, e.email, e.sexo, e.boletin, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id");
+
+		// $stmt = (new Conexion)->conectar()->prepare("SELECT e.nombre, e.email, e.sexo, e.boletin, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id");
 
 		$stmt -> execute();
 
@@ -25,10 +28,9 @@ class ModeloEmpleados {
 
 	static public function mdlGuardarEmpleados($tabla,$tablaEmpleadoRol,$datos){
 		$datos["area_id"] = intval($datos["area_id"]);
-        // return  ($datos);
-		// die();
 
-		$stmt = (new Conexion)->conectar()->prepare("INSERT INTO $tabla(nombre,email,sexo,area_id,boletin,descripcion) VALUES (:nombre, :email,:sexo, :area_id, :boletin, :descripcion)");
+        $db = new Conexion();
+		$stmt = $db->pdo->prepare("INSERT INTO $tabla(nombre,email,sexo,area_id,boletin,descripcion) VALUES (:nombre, :email,:sexo, :area_id, :boletin, :descripcion)");
         
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
@@ -36,16 +38,26 @@ class ModeloEmpleados {
 		$stmt->bindParam(":area_id", $datos["area_id"], PDO::PARAM_INT);
 		$stmt->bindParam(":boletin", $datos["boletin"], PDO::PARAM_INT);
 		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+
         $nReg = $stmt->execute();
+        
 		if($nReg > 0){
             
 			//ULTIMO REGISTRO EN LA TABLA 
-			// $db = new conexion();
-			// $sql = $db->conectar()->prepare('SELECT @@IDENTITY AS IdEmpleado');    
-			// $sql->execute();
-			// $result = $sql->fetch();              
-			// $id = $result['IdEmpleado']; 	
-            // return  $id;
+			$id_empleado = $db->pdo->lastInsertId();
+			$roles = $datos["roles"];
+            
+			foreach($roles as $rol){
+				$dbrol = new Conexion();
+				$stmtrol = $dbrol->pdo->prepare("INSERT INTO $tablaEmpleadoRol(empleado_id,rol_id) VALUES (:empleado_id, :rol_id)");
+
+				$stmtrol->bindParam(":empleado_id", $id_empleado, PDO::PARAM_INT);
+		        $stmtrol->bindParam(":rol_id", $rol, PDO::PARAM_INT);
+
+				$stmtrol->execute();
+			}
+			return "ok";
+			// return sizeof($roles);
 		}
 		
 		$stmt = null;

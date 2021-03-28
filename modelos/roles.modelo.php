@@ -8,8 +8,8 @@ class ModeloRoles{
 	=============================================*/
 
     static public function mdlMostrarRoles($tabla){
-
-        $stmt = (new Conexion)->conectar()->prepare("SELECT * FROM $tabla ");
+        $db = new Conexion();
+        $stmt = $db->pdo->prepare("SELECT * FROM $tabla ");
 
         $stmt -> execute();
 

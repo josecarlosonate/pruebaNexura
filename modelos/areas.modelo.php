@@ -8,8 +8,8 @@ class ModeloAreas{
 	=============================================*/
 
     static public function mdlMostrarAreas($tabla){
-
-        $stmt = (new Conexion)->conectar()->prepare("SELECT * FROM $tabla ");
+        $db = new Conexion();
+        $stmt = $db->pdo->prepare("SELECT * FROM $tabla ");
 
         $stmt -> execute();
 
