@@ -36,20 +36,18 @@ class ModeloEmpleados {
 		$stmt->bindParam(":area_id", $datos["area_id"], PDO::PARAM_INT);
 		$stmt->bindParam(":boletin", $datos["boletin"], PDO::PARAM_INT);
 		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
-
-		if($stmt->execute()){
+        $nReg = $stmt->execute();
+		if($nReg > 0){
             
-			// insertar los roles
-			// $roles = $datos["roles"];
-
-			return "ok";
-
-		}else{
-
-			return "error";
-		
+			//ULTIMO REGISTRO EN LA TABLA 
+			// $db = new conexion();
+			// $sql = $db->conectar()->prepare('SELECT @@IDENTITY AS IdEmpleado');    
+			// $sql->execute();
+			// $result = $sql->fetch();              
+			// $id = $result['IdEmpleado']; 	
+            // return  $id;
 		}
-
+		
 		$stmt = null;
 		
 

@@ -95,7 +95,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Crear nuevo empleado</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" id="btnCerrarM" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -192,7 +192,7 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                        <button type="button" id="btnGuardar" data-dismiss="modal" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>

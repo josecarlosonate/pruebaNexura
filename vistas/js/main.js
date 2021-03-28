@@ -14,7 +14,7 @@ $("i.fa.fa-trash").click(function () {
         }
     });
 });
-// mensajes español 
+// mensajes español
 $(document).ready(function () {
     jQuery.extend(jQuery.validator.messages, {
         required: "Este campo es obligatorio.",
@@ -28,22 +28,22 @@ $(document).ready(function () {
         ),
     });
 });
-// validar formulario 
+// validar formulario
 $("#formularioRegistro").validate({
     rules: {
         nombre: {
             required: true,
-            minlength: 4
+            minlength: 4,
         },
         email: {
             required: true,
-            email: true
+            email: true,
         },
         sexo: {
-            required: true
+            required: true,
         },
         sltArea: {
-            required: true
+            required: true,
         },
         descripcion: {
             required: true,
@@ -51,35 +51,34 @@ $("#formularioRegistro").validate({
             maxlength: 200,
         },
         "roles[]": {
-            required: true
-        }
+            required: true,
+        },
     },
     messages: {
-        "roles[]": "Debe escoger un rol obligatoriamente."
-    }
+        "roles[]": "Debe escoger un rol obligatoriamente.",
+    },
 });
 
 $("#btnGuardar").click(function () {
-
     if ($("#formularioRegistro").valid() == false) {
         return;
     }
 
-    let nombre = $('#nombre').val();
-    let email = $('#email').val();
+    let nombre = $("#nombre").val();
+    let email = $("#email").val();
     let sexo = $("[name='sexo']:checked").val();
-    let area = $('#sltArea').val();
-    let descripcion = $('#descripcion').val();
-    let boletin = $('#boletin').is(":checked");
-    boletin = (boletin == true) ? 1 : 0;
+    let area = $("#sltArea").val();
+    let descripcion = $("#descripcion").val();
+    let boletin = $("#boletin").is(":checked");
+    boletin = boletin == true ? 1 : 0;
     let roles = [];
-    $('.form-check-input.roles').each(function () {
+    $(".form-check-input.roles").each(function () {
         if (this.checked) {
             roles.push($(this).val());
         }
     });
 
-    // objeto de datos 
+    // objeto de datos
     let objDatos = {
         nombre: nombre,
         email: email,
@@ -87,24 +86,26 @@ $("#btnGuardar").click(function () {
         area_id: area,
         descripcion: descripcion,
         boletin: boletin,
-        roles: roles
-    }
+        roles: roles,
+    };
     // console.log(objDatos,JSON.stringify(objDatos));
     enviarAjax(JSON.stringify(objDatos));
 });
 
-function enviarAjax(datos){
+function enviarAjax(datos) {
     $.ajax({
-        async:true,          
-            url: 'ajax/empleados.ajax.php',
-            type:'POST',
-            data: {
-                accion: "nuevo",
-                empleado: datos
-            },
-            success: function(response){
-                console.log((response));
-                // console.log(JSON.parse(data,true));
+        async: true,
+        url: "ajax/empleados.ajax.php",
+        type: "POST",
+        data: {
+            accion: "nuevo",
+            empleado: datos,
+        },
+        success: function (response) {
+            console.log(response);
+            if (response == "ok") {
+
             }
+        },
     });
 }
