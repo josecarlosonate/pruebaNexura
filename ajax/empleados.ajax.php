@@ -36,7 +36,7 @@ class AjaxEmpleados{
 	ELIMINAR EMPLEADO
 	=============================================*/
     
-	public function ajaxEliminarEmpleados($id){
+	public function ajaxEliminarEmpleado($id){
 
 		$respuesta = ControladorEmpleados::ctrEliminarEmpleados($id);
 
@@ -87,7 +87,7 @@ if(isset($_POST["accion"])){
 	// eliminar empleados 
 	if($_POST["accion"] == 'eliminar'){
 		$empleado = new AjaxEmpleados();
-		$empleado->ajaxTraerEmpleado($_POST["id"]);
+		$empleado->ajaxEliminarEmpleado($_POST["id"]);
 	}
 
 	// editar empleados 

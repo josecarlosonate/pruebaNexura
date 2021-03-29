@@ -172,7 +172,7 @@ function eliminarEmpleado(id) {
                     id: id
                 },
                 success: function (response) {
-                    console.log(response);
+                    console.log("delete:"+response);
                     if(response == 'ok'){
                         Swal.fire({
                             position: 'center',
