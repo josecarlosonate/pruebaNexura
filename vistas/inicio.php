@@ -176,7 +176,7 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btnGuardar" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                        <button type="button" id="btnGuardar"  class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>
