@@ -1,19 +1,19 @@
-$("i.fa.fa-trash").click(function () {
-    Swal.fire({
-        title: "Estas segur@?",
-        text: "¡No podrás revertir esto!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "¡Sí, bórralo!",
-        cancelButtonText: "Cancelar",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        }
-    });
-});
+// $("i.fa.fa-trash").click(function () {
+//     Swal.fire({
+//         title: "Estas segur@?",
+//         text: "¡No podrás revertir esto!",
+//         icon: "warning",
+//         showCancelButton: true,
+//         confirmButtonColor: "#3085d6",
+//         cancelButtonColor: "#d33",
+//         confirmButtonText: "¡Sí, bórralo!",
+//         cancelButtonText: "Cancelar",
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             // Swal.fire("Deleted!", "Your file has been deleted.", "success");
+//         }
+//     });
+// });
 // mensajes español
 $(document).ready(function () {
     jQuery.extend(jQuery.validator.messages, {
@@ -59,6 +59,7 @@ $("#formularioRegistro").validate({
     },
 });
 
+// guardar datos del empleado 
 $("#btnGuardar").click(function () {
     if ($("#formularioRegistro").valid() == false) {
         return;
@@ -104,8 +105,64 @@ function enviarAjax(datos) {
         success: function (response) {
             console.log(response);
             if (response == "ok") {
-
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'El empleado ha sido guardado',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                $('#Modal').modal('hide');
+                $('#formularioRegistro')[0].reset();
+                mostrarEmpleados();
+            }
+            if (response == "error") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '¡Algo salió mal!',
+                    footer: 'no se pudo realizar la operacion'
+                })
             }
         },
     });
 }
+
+// traer listado de empleados 
+function mostrarEmpleados() {
+    $.ajax({
+        async: true,
+        url: "ajax/empleados.ajax.php",
+        type: "POST",
+        data: {
+            accion: "consultar",
+        },
+        success: function (response) {
+            let data = JSON.parse(response);
+
+            data.forEach(element => {
+                let boletin = element.boletin;
+                boletin = (element.boletin == 0 ) ? 'NO' : 'SI';
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                <th class="text-primary">${element.nombre}</th>
+                <th class="text-primary">${element.email}</th>
+                <th class="text-primary">${element.sexo}</th>
+                <th class="text-primary">${element.area}</th>
+                <th class="text-primary">${boletin}</th>
+                <th class="text-primary iconoEditar" onclick="eliminarEmpleado(${element.id})"><i class="fa fa-edit"></i></th>
+                <th class="text-primary iconoBorrar" onclick="editarEmpleado(${element.id})"><i class="fa fa-trash"></i></th>
+                `;
+                $('#listadoEmpleados').append(tr);
+            });
+
+        }
+    });
+}
+mostrarEmpleados();
+
+// eliminar empleado 
+function eliminarEmpleado(id){}
+
+// editar o actualizar 
+function editarEmpleado(id){}

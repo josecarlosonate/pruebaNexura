@@ -5,7 +5,7 @@ class ControladorEmpleados{
 	// public $datos;
 
     /*=============================================
-	MOSTRAR USUARIO
+	MOSTRAR EMPLEADOS
 	=============================================*/
 
 	static public function ctrMostrarEmpleados(){
@@ -20,7 +20,7 @@ class ControladorEmpleados{
 	}
 
 	/*=============================================
-	GUARDAR USUARIO
+	GUARDAR EMPLEADO
 	=============================================*/
 
 	static public function ctrGuardarEmpleados($datos){
@@ -33,6 +33,32 @@ class ControladorEmpleados{
 		return $respuesta;
 		
 
+	}
+
+	/*=============================================
+	ELIMINAR EMPLEADO
+	=============================================*/
+
+	static public function ctrEliminarEmpleados($id){
+		$tabla = "empleados";
+
+		$respuesta = ModeloEmpleados::mdlEliminarEmpleados($tabla,$id);
+        
+		return $respuesta;
+		
+	}
+
+	/*=============================================
+	EDITAR EMPLEADO
+	=============================================*/
+
+	static public function ctrEditarEmpleados($id){
+		$tabla = "empleados";
+
+		$respuesta = ModeloEmpleados::mdlEditarEmpleados($tabla,$id);
+        
+		return $respuesta;
+		
 	}
 }
 

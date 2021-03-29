@@ -10,9 +10,7 @@ class ModeloEmpleados {
 
 	static public function mdlMostrarEmpleados($tabla,$tablaArea){
 		$db = new Conexion();
-		$stmt = $db->pdo->prepare("SELECT e.nombre, e.email, e.sexo, e.boletin, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id");
-
-		// $stmt = (new Conexion)->conectar()->prepare("SELECT e.nombre, e.email, e.sexo, e.boletin, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id");
+		$stmt = $db->pdo->prepare("SELECT e.id, e.nombre, e.email, e.sexo, e.boletin, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id ORDER BY e.id");
 
 		$stmt -> execute();
 
@@ -64,6 +62,18 @@ class ModeloEmpleados {
 		
 
 	}
+
+	/*=============================================
+	ELIMINAR EMPLEADOS
+	=============================================*/
+    
+	static public function mdlEliminarEmpleados(){}
+
+	/*=============================================
+	EDITAR EMPLEADOS
+	=============================================*/
+
+	static public function mdlEditarEmpleados(){}
 }
 
 ?>

@@ -61,23 +61,7 @@
                                     <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php
-                                foreach ($empleados as $key => $value) {
-                                ?>
-                                    <tr>
-                                        <th class="text-primary"><?php echo $value["nombre"] ?></th>
-                                        <th class="text-primary"><?php echo $value["email"] ?></th>
-                                        <th class="text-primary"><?php echo $value["sexo"] ?></th>
-                                        <th class="text-primary"><?php echo $value["area"] ?></th>
-                                        <th class="text-primary"><?php echo $resultado = ($value["boletin"] == 0)  ? "NO" : "SI" ?>
-                                        </th>
-                                        <th class="text-primary iconoEditar"><i class="fa fa-edit"></i></th>
-                                        <th class="text-primary iconoBorrar"><i class="fa fa-trash"></i></th>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
+                            <tbody id="listadoEmpleados">
                             </tbody>
                         </table>
                     </div>
