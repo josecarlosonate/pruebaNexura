@@ -67,7 +67,24 @@ class ModeloEmpleados {
 	ELIMINAR EMPLEADOS
 	=============================================*/
     
-	static public function mdlEliminarEmpleados(){}
+	static public function mdlEliminarEmpleados($tabla,$id){
+		$db = new Conexion();
+		$stmt = $db->pdo->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
+
+		$nReg = $stmt->execute();
+        
+		if($nReg > 0){
+
+			return 'ok';
+
+		}else{
+
+			return 'error';
+
+		}
+	}
 
 	/*=============================================
 	EDITAR EMPLEADOS

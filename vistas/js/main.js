@@ -1,18 +1,5 @@
 // $("i.fa.fa-trash").click(function () {
-//     Swal.fire({
-//         title: "Estas segur@?",
-//         text: "¡No podrás revertir esto!",
-//         icon: "warning",
-//         showCancelButton: true,
-//         confirmButtonColor: "#3085d6",
-//         cancelButtonColor: "#d33",
-//         confirmButtonText: "¡Sí, bórralo!",
-//         cancelButtonText: "Cancelar",
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             // Swal.fire("Deleted!", "Your file has been deleted.", "success");
-//         }
-//     });
+
 // });
 // mensajes español
 $(document).ready(function () {
@@ -130,6 +117,7 @@ function enviarAjax(datos) {
 
 // traer listado de empleados 
 function mostrarEmpleados() {
+    $('#listadoEmpleados').empty();
     $.ajax({
         async: true,
         url: "ajax/empleados.ajax.php",
@@ -142,7 +130,7 @@ function mostrarEmpleados() {
 
             data.forEach(element => {
                 let boletin = element.boletin;
-                boletin = (element.boletin == 0 ) ? 'NO' : 'SI';
+                boletin = (element.boletin == 0) ? 'NO' : 'SI';
                 let tr = document.createElement('tr');
                 tr.innerHTML = `
                 <th class="text-primary">${element.nombre}</th>
@@ -150,8 +138,8 @@ function mostrarEmpleados() {
                 <th class="text-primary">${element.sexo}</th>
                 <th class="text-primary">${element.area}</th>
                 <th class="text-primary">${boletin}</th>
-                <th class="text-primary iconoEditar" onclick="eliminarEmpleado(${element.id})"><i class="fa fa-edit"></i></th>
-                <th class="text-primary iconoBorrar" onclick="editarEmpleado(${element.id})"><i class="fa fa-trash"></i></th>
+                <th class="text-primary iconoEditar" onclick="editarEmpleado(${element.id})"><i class="fa fa-edit"></i></th>
+                <th class="text-primary iconoBorrar" onclick="eliminarEmpleado(${element.id})"><i class="fa fa-trash"></i></th>
                 `;
                 $('#listadoEmpleados').append(tr);
             });
@@ -162,7 +150,52 @@ function mostrarEmpleados() {
 mostrarEmpleados();
 
 // eliminar empleado 
-function eliminarEmpleado(id){}
+function eliminarEmpleado(id) {
+    Swal.fire({
+        title: "Estas segur@?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "¡Sí, bórralo!",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // eliminando 
+            $.ajax({
+                async: true,
+                url: "ajax/empleados.ajax.php",
+                type: "POST",
+                data: {
+                    accion: "eliminar",
+                    id: id
+                },
+                success: function (response) {
+                    console.log(response);
+                    if(response == 'ok'){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'El empleado ha sido eliminado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        mostrarEmpleados();
+                    }
+                    if(response == 'error'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: '¡Algo salió mal!',
+                            footer: 'no se pudo realizar la operacion'
+                        });
+                    }
+                }
+            });
+        }
+    });
+}
 
 // editar o actualizar 
-function editarEmpleado(id){}
+function editarEmpleado(id) {}
