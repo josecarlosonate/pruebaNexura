@@ -47,11 +47,11 @@ class AjaxEmpleados{
 	EDITAR EMPLEADO
 	=============================================*/
     
-	public function ajaxEditarEmpleados($id){
+	public function ajaxTraerEmpleado($id){
 
-		$respuesta = ControladorEmpleados::ctrEditarEmpleados($id);
+		$respuesta = ControladorEmpleados::ctrTraerEmpleado($id);
 
-		echo ($respuesta);
+		echo json_encode($respuesta);
 	}
 
 }
@@ -87,13 +87,13 @@ if(isset($_POST["accion"])){
 	// eliminar empleados 
 	if($_POST["accion"] == 'eliminar'){
 		$empleado = new AjaxEmpleados();
-		$empleado->ajaxEliminarEmpleados($_POST["id"]);
+		$empleado->ajaxTraerEmpleado($_POST["id"]);
 	}
 
 	// editar empleados 
 	if($_POST["accion"] == 'editar'){
 		$empleado = new AjaxEmpleados();
-		$empleado->ajaxEditarEmpleados($_POST["id"]);
+		$empleado->ajaxTraerEmpleado($_POST["id"]);
 	}
 }
 

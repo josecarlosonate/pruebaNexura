@@ -87,10 +87,38 @@ class ModeloEmpleados {
 	}
 
 	/*=============================================
-	EDITAR EMPLEADOS
+	TRAER DATOS DE EMPLEADO A EDITAR
 	=============================================*/
 
-	static public function mdlEditarEmpleados(){}
+	static public function mdlTraerEmpleado($tabla,$id,$tablaArea,$tablaEmpleadoRol,$tablaRol){
+		$db = new Conexion();
+
+		$stmt = $db->pdo->prepare("SELECT e.id, e.nombre, e.email, e.sexo, e.boletin, e.descripcion, a.nombre as area FROM $tabla e INNER JOIN $tablaArea a ON e.area_id = a.id  WHERE e.id = :id ");
+
+		$stmt2 = $db->pdo->prepare("SELECT r.nombre FROM $tablaRol r INNER JOIN $tablaEmpleadoRol er ON r.id = er.rol_id WHERE er.empleado_id = :id");
+
+		// UNION ALL SELECT er.rol_id as rol_id FROM $tablaEmpleadoRol er WHERE e.id
+		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
+		$stmt2 -> bindParam(":id", $id, PDO::PARAM_INT);
+
+		$stmt -> execute();
+		$data = $stmt -> fetch();
+        $stmt2 -> execute();
+        $roles = $stmt2 -> fetchAll();
+		
+		$res = array(
+            'data' => $data,
+			'roles' => $roles
+		);
+        
+		return $res;
+
+		$stmt = null;
+		$stmt2 = null;
+	}
+
+
+	
 }
 
 ?>

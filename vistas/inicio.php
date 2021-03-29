@@ -57,7 +57,7 @@
                                     <th scope="col"><i class="fa fa-venus-mars"></i> &nbsp;Sexo</th>
                                     <th scope="col"><i class="fa fa-briefcase"></i> &nbsp;Area</th>
                                     <th scope="col"><i class="fa fa-envelope"></i> &nbsp;Boletin</th>
-                                    <th scope="col">Modificar</th>
+                                    <th scope="col">Ver</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
@@ -147,7 +147,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="">
-                                    <input type="checkbox"  id="boletin" aria-label="Radio">
+                                    <input type="checkbox" id="boletin" aria-label="Radio">
                                 </div>
                             </div>&nbsp;
                             <label for="">Desea recibir boletin informativo?</label>
@@ -179,6 +179,87 @@
                         <button type="button" id="btnGuardar" data-dismiss="modal" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Ver Empleado-->
+    <div class="modal fade" id="ModalVer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success" id="exampleModalLabel">Detalles Del Empleado</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- nombre  -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Nombre:</span>
+                                </div>
+                                <input type="text" id="verNombre" name="verNombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- nombre  -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Email:</span>
+                                </div>
+                                <input type="email" id="verEmail" name="verEmail" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- sexo  -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Sexo:</span>
+                                </div>
+                                <input type="text" id="verSexo" name="verSexo" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- area  -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Area:</span>
+                                </div>
+                                <input type="text" id="verArea" name="verArea" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- boletin  -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Recibe Boletin:</span>
+                                </div>
+                                <input type="text" id="verBoletin" name="verBoletin" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- descripcion  -->
+                            <div class="input-group mb-3">
+                                <label for="" class="input-group-text">Descripcion: </label>
+                                <textarea name="verDescripcion" id="verDescripcion" rows="3" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- descripcion  -->
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Roles asignados:</span>
+                                </div>
+                                <input type="text" id="verRoles" name="verRoles" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

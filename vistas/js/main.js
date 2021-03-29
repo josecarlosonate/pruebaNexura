@@ -138,7 +138,7 @@ function mostrarEmpleados() {
                 <th class="text-primary">${element.sexo}</th>
                 <th class="text-primary">${element.area}</th>
                 <th class="text-primary">${boletin}</th>
-                <th class="text-primary iconoEditar" onclick="editarEmpleado(${element.id})"><i class="fa fa-edit"></i></th>
+                <th class="text-primary iconoEditar" onclick="traerEmpleado(${element.id})"><i class="fa fa-eye"></i></th>
                 <th class="text-primary iconoBorrar" onclick="eliminarEmpleado(${element.id})"><i class="fa fa-trash"></i></th>
                 `;
                 $('#listadoEmpleados').append(tr);
@@ -198,4 +198,36 @@ function eliminarEmpleado(id) {
 }
 
 // editar o actualizar 
-function editarEmpleado(id) {}
+function traerEmpleado(id) {
+    // primero traigo los datos del empleado 
+    $.ajax({
+        async: true,
+        url: "ajax/empleados.ajax.php",
+        type: "POST",
+        data: {
+            accion: "editar",
+            id: id
+        },
+        success: function (response) {
+            let data = JSON.parse(response);
+            
+            $('#ModalVer').modal('show')
+            $('#verNombre').val(data.data.nombre);
+            $('#verEmail').val(data.data.email);
+            $('#verSexo').val(data.data.sexo);
+            $('#verArea').val(data.data.area);
+            let boletin = data.data.boletin;
+                boletin = (data.data.boletin == 0) ? 'NO' : 'SI';
+            $('#verBoletin').val(boletin);
+            $('#verDescripcion').val(data.data.descripcion);
+            
+            let roles = data.roles;
+            let rolesArray = [];
+            roles.forEach(element => {
+                rolesArray.push(element.nombre);
+            });
+            $('#verRoles').val(rolesArray.toString());
+            // console.log(rolesArray);
+        }
+    });
+}

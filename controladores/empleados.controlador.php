@@ -49,13 +49,16 @@ class ControladorEmpleados{
 	}
 
 	/*=============================================
-	EDITAR EMPLEADO
+	TRAER DATOS DE EMPLEADO A EDITAR
 	=============================================*/
 
-	static public function ctrEditarEmpleados($id){
+	static public function ctrTraerEmpleado($id){
 		$tabla = "empleados";
+		$tablaArea = "areas";
+		$tablaEmpleadoRol = "empleado_rol";
+		$tablaRol = "roles";
 
-		$respuesta = ModeloEmpleados::mdlEditarEmpleados($tabla,$id);
+		$respuesta = ModeloEmpleados::mdlTraerEmpleado($tabla,$id,$tablaArea,$tablaEmpleadoRol,$tablaRol);
         
 		return $respuesta;
 		
