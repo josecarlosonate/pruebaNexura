@@ -10,6 +10,7 @@ class AjaxEmpleados{
 	=============================================*/
 
 	public $datosEmpleado;	
+    public $datosEmpleadoEdit;
 
 	public function ajaxGuardarEmpleados(){
 
@@ -44,7 +45,7 @@ class AjaxEmpleados{
 	}
 
 	/*=============================================
-	EDITAR EMPLEADO
+	TRAER EMPLEADO
 	=============================================*/
     
 	public function ajaxTraerEmpleado($id){
@@ -52,6 +53,19 @@ class AjaxEmpleados{
 		$respuesta = ControladorEmpleados::ctrTraerEmpleado($id);
 
 		echo json_encode($respuesta);
+	}
+
+	/*=============================================
+	TRAER EMPLEADO
+	=============================================*/
+    
+	public function ajaxEditarEmpleado($id){
+
+		$datos = $this->datosEmpleadoEdit; 
+
+		$respuesta = ControladorEmpleados::ctrEditarEmpleado($id,$datos);
+
+		echo ($respuesta);
 	}
 
 }
@@ -90,10 +104,27 @@ if(isset($_POST["accion"])){
 		$empleado->ajaxEliminarEmpleado($_POST["id"]);
 	}
 
-	// traer o editar empleados 
-	if($_POST["accion"] == 'traer' || $_POST["accion"] == 'editar'){
+	// traer para ver o traer para editar
+	if($_POST["accion"] == 'traerVer' || $_POST["accion"] == 'traerEditar'){
 		$empleado = new AjaxEmpleados();
 		$empleado->ajaxTraerEmpleado($_POST["id"]);
+	}
+
+	// editar empleado
+	if($_POST["accion"] == 'editar'){
+		$empleado = new AjaxEmpleados();
+		$empleadodata = json_decode($_POST['empleado'],true);
+
+		// validar con expresion regular nombre y email
+		if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $empleadodata['nombre'])
+		&& preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $empleadodata['email'] )
+		){
+			$empleado -> datosEmpleadoEdit = $empleadodata;
+
+			$empleado->ajaxEditarEmpleado($empleadodata['id']);
+		}else{
+			echo "error";
+		}
 	}
 }
 

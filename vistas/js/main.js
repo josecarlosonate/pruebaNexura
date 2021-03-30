@@ -76,17 +76,19 @@ $("#btnGuardar").click(function () {
         boletin: boletin,
         roles: roles,
     };
-    // console.log(objDatos,JSON.stringify(objDatos));
-    enviarAjax(JSON.stringify(objDatos));
+    
+    let accion = "nuevo";
+
+    enviarAjax(JSON.stringify(objDatos),accion);
 });
 
-function enviarAjax(datos) {
+function enviarAjax(datos,accion) {
     $.ajax({
         async: true,
         url: "ajax/empleados.ajax.php",
         type: "POST",
         data: {
-            accion: "nuevo",
+            accion: accion,
             empleado: datos,
         },
         success: function (response) {
@@ -103,6 +105,19 @@ function enviarAjax(datos) {
                 $('#formularioRegistro')[0].reset();
                 mostrarEmpleados();
             }
+            if (response == "actualizado") {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Datos del empleado actualizados',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                $('#ModalEditar').modal('hide');
+                $('#formularioEditar')[0].reset();
+                mostrarEmpleados();
+            }
+
             if (response == "error") {
                 Swal.fire({
                     icon: 'error',
@@ -207,7 +222,7 @@ function traerEmpleado(id) {
         url: "ajax/empleados.ajax.php",
         type: "POST",
         data: {
-            accion: "traer",
+            accion: "traerVer",
             id: id
         },
         success: function (response) {
@@ -243,7 +258,7 @@ function editarEmpleado(id) {
         url: "ajax/empleados.ajax.php",
         type: "POST",
         data: {
-            accion: "editar",
+            accion: "traerEditar",
             id: id
         },
         success: function (response) {
@@ -284,7 +299,72 @@ $('#editBoletin').click(function(){
     console.log('ok');
 });
 
+// validar formulario editar
+$("#formularioEditar").validate({
+    rules: {
+        editNombre: {
+            required: true,
+            minlength: 4,
+        },
+        editEmail: {
+            required: true,
+            email: true,
+        },
+        editSexo: {
+            required: true,
+        },
+        sltEditArea: {
+            required: true,
+        },
+        editDescripcion: {
+            required: true,
+            minlength: 5,
+            maxlength: 200,
+        },
+        "editRoles[]": {
+            required: true,
+        },
+    },
+    messages: {
+        "editRoles[]": "Debe escoger un rol obligatoriamente.",
+    },
+});
 // boton boletin 
 $('#btnEditar').click(function(){
-    console.log('editar');
+    
+    if ($("#formularioEditar").valid() == false) {
+        return;
+    }
+
+    let id = $("#idEmpleado").val();
+    let nombre = $("#editNombre").val();
+    let email = $("#editEmail").val();
+    let sexo = $("[name='editSexo']:checked").val();
+    let area = $("#sltEditArea").val();
+    let descripcion = $("#editDescripcion").val();
+    let boletin = $("#editBoletin").is(":checked");
+    boletin = boletin == true ? 1 : 0;
+    let roles = [];
+    $(".form-check-input.editRoles").each(function () {
+        if (this.checked) {
+            roles.push($(this).val());
+        }
+    });
+
+        // objeto de datos
+        let objDatos = {
+            id: id,
+            nombre: nombre,
+            email: email,
+            sexo: sexo,
+            area_id: area,
+            descripcion: descripcion,
+            boletin: boletin,
+            roles: roles,
+        };
+        
+        let accion = "editar";
+        enviarAjax(JSON.stringify(objDatos),accion);
+        // console.log(objDatos);
+
 });

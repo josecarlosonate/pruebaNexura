@@ -63,6 +63,23 @@ class ControladorEmpleados{
 		return $respuesta;
 		
 	}
+
+	/*=============================================
+	TRAER DATOS DE EMPLEADO A EDITAR
+	=============================================*/
+
+	static public function ctrEditarEmpleado($id,$datos){
+		$tabla = "empleados";
+		$tablaEmpleadoRol = "empleado_rol";
+		
+
+		$respuesta = ModeloEmpleados::mdlEditarEmpleado($tabla,$id,$tablaEmpleadoRol,$datos);
+        
+		return $respuesta;
+		
+	}
+
+
 }
 
 ?>

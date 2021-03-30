@@ -283,8 +283,8 @@
                                     <input type="text" id="editNombre" name="editNombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </div>
+                            <!-- email  -->
                             <div class="col-md-6">
-                                <!-- nombre  -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Email:</span>
@@ -295,7 +295,7 @@
                         </div>
                         <div class="row">
                             <!-- sexo  -->
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Sexo:</span>
@@ -303,12 +303,12 @@
                                     <div class="form-control">
                                         <div class="form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" id="editSexoM" class="form-check-input optradio" value="M" name="sexo">Masculino
+                                                <input type="radio" id="editSexoM" name="editSexo" class="form-check-input optradio" value="M" name="sexo">Masculino
                                             </label>
                                         </div>
                                         <div class="form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" id="editSexoF" class="form-check-input optradio" value="F" name="sexo">Femenino
+                                                <input type="radio" id="editSexoF" name="editSexo" class="form-check-input optradio" value="F" name="sexo">Femenino
                                             </label>
                                         </div>
                                     </div>
@@ -357,7 +357,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <!-- descripcion  -->
+                                <!-- roles  -->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Roles:</span>
@@ -367,7 +367,7 @@
                                             foreach ($roles as $key => $value) {
                                             ?>
                                                 <li class="list-group-item">
-                                                    &nbsp;<input type="checkbox" id="editRoles<?php echo $value["id"] ?>" name='roles[]' class="form-check-input roles" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?>
+                                                    &nbsp;<input type="checkbox" id="editRoles<?php echo $value["id"] ?>" name='editRoles[]' class="form-check-input editRoles" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?>
                                                 </li>
                                             <?php
                                             }
