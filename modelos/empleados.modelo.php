@@ -140,7 +140,7 @@ class ModeloEmpleados
 		if ($nReg > 0) {
 
 			//ULTIMO REGISTRO EN LA TABLA 
-			$id_empleado = $db->pdo->lastInsertId();
+			$id_empleado = $id;
 
 			$dbdeletRol = new Conexion();
 			$stmtdeletRol = $dbdeletRol->pdo->prepare("DELETE FROM $tablaEmpleadoRol WHERE empleado_id = :empleado_id");
@@ -152,7 +152,7 @@ class ModeloEmpleados
 			if ($nDeletReg > 0) {
 
 				$roles = $datos["roles"];
-
+                
 				foreach ($roles as $rol) {
 					$dbrol = new Conexion();
 					$stmtrol = $dbrol->pdo->prepare("INSERT INTO $tablaEmpleadoRol(empleado_id,rol_id) VALUES (:empleado_id, :rol_id)");
@@ -162,9 +162,9 @@ class ModeloEmpleados
 
 					$stmtrol->execute();
 				}
+				return "actualizado";
 			}
 
-			return "actualizado";
 		}else{
 			return "error";
 		}
