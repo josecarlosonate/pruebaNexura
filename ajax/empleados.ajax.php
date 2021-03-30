@@ -90,8 +90,8 @@ if(isset($_POST["accion"])){
 		$empleado->ajaxEliminarEmpleado($_POST["id"]);
 	}
 
-	// editar empleados 
-	if($_POST["accion"] == 'editar'){
+	// traer o editar empleados 
+	if($_POST["accion"] == 'traer' || $_POST["accion"] == 'editar'){
 		$empleado = new AjaxEmpleados();
 		$empleado->ajaxTraerEmpleado($_POST["id"]);
 	}

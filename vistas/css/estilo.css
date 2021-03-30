@@ -32,11 +32,16 @@ body{
 }
 
 .iconoEditar i,
+.iconoVer i,
 .iconoBorrar i{
     cursor: pointer;
 }
 
 .iconoEditar i{
+    color: #FFCD07;
+}
+
+.iconoVer i{
     color: green;
 }
 
@@ -50,4 +55,11 @@ body{
 
 .error{
     color: red;
+}
+
+.custom-switch {
+    padding-left: 2.25rem;
+}
+ul.list-group {
+    margin-bottom: 4px;
 }

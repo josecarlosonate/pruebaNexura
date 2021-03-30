@@ -138,8 +138,9 @@ function mostrarEmpleados() {
                 <th class="text-primary">${element.sexo}</th>
                 <th class="text-primary">${element.area}</th>
                 <th class="text-primary">${boletin}</th>
-                <th class="text-primary iconoEditar" onclick="traerEmpleado(${element.id})"><i class="fa fa-eye"></i></th>
-                <th class="text-primary iconoBorrar" onclick="eliminarEmpleado(${element.id})"><i class="fa fa-trash"></i></th>
+                <th class="iconoVer" onclick="traerEmpleado(${element.id})"><i class="fa fa-eye"></i></th>
+                <th class="iconoEditar" onclick="editarEmpleado(${element.id})"><i class="fa fa-edit"></i></th>
+                <th class="iconoBorrar" onclick="eliminarEmpleado(${element.id})"><i class="fa fa-trash"></i></th>
                 `;
                 $('#listadoEmpleados').append(tr);
             });
@@ -172,8 +173,8 @@ function eliminarEmpleado(id) {
                     id: id
                 },
                 success: function (response) {
-                    console.log("delete:"+response);
-                    if(response == 'ok'){
+                    console.log("delete:" + response);
+                    if (response == 'ok') {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -183,7 +184,7 @@ function eliminarEmpleado(id) {
                         });
                         mostrarEmpleados();
                     }
-                    if(response == 'error'){
+                    if (response == 'error') {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
@@ -197,30 +198,32 @@ function eliminarEmpleado(id) {
     });
 }
 
-// editar o actualizar 
+// traer detalle de empleado 
 function traerEmpleado(id) {
+    
     // primero traigo los datos del empleado 
     $.ajax({
         async: true,
         url: "ajax/empleados.ajax.php",
         type: "POST",
         data: {
-            accion: "editar",
+            accion: "traer",
             id: id
         },
         success: function (response) {
             let data = JSON.parse(response);
-            
             $('#ModalVer').modal('show')
             $('#verNombre').val(data.data.nombre);
             $('#verEmail').val(data.data.email);
-            $('#verSexo').val(data.data.sexo);
+            let sexo = data.data.sexo;
+            sexo = (data.data.sexo == 'M') ? 'Masculino' : 'Femenino';
+            $('#verSexo').val(sexo);
             $('#verArea').val(data.data.area);
             let boletin = data.data.boletin;
-                boletin = (data.data.boletin == 0) ? 'NO' : 'SI';
+            boletin = (data.data.boletin == 0) ? 'NO' : 'SI';
             $('#verBoletin').val(boletin);
             $('#verDescripcion').val(data.data.descripcion);
-            
+
             let roles = data.roles;
             let rolesArray = [];
             roles.forEach(element => {
@@ -231,3 +234,57 @@ function traerEmpleado(id) {
         }
     });
 }
+// *********************** editar empleado ********************************************  
+function editarEmpleado(id) {
+    $('#formularioEditar')[0].reset();
+    // $('#ModalEditar').modal('show')
+    $.ajax({
+        async: true,
+        url: "ajax/empleados.ajax.php",
+        type: "POST",
+        data: {
+            accion: "editar",
+            id: id
+        },
+        success: function (response) {
+            let data = JSON.parse(response);
+            $('#ModalEditar').modal('show')
+            $('#idEmpleado').val(data.data.id);
+            $('#editNombre').val(data.data.nombre);
+            $('#editEmail').val(data.data.email);
+
+            let sexo = data.data.sexo;
+            $('#editSexo' + sexo).prop("checked", true);
+
+            let area = $("#sltEditArea option[value=" + data.data.id_area + "]");
+            area.attr("selected", true);
+
+            
+            (data.data.boletin == 0) ? $('#editBoletin').prop("checked", false) : $('#editBoletin').prop("checked", true);
+            (data.data.boletin == 0) ? $('#lblBoletin').text('No') : $('#lblBoletin').text('Si');
+            
+            $('#editDescripcion').val(data.data.descripcion);
+
+            let roles = data.roles;
+            roles.forEach(element => {
+                $('#editRoles' + element.id_roles).prop("checked", true);
+            });
+            
+
+        }
+    });
+}
+// boton boletin 
+$('#editBoletin').click(function(){
+    if($('#lblBoletin').text() == 'Si'){
+        $('#lblBoletin').text('No')
+    }else{
+        $('#lblBoletin').text('Si')
+    }
+    console.log('ok');
+});
+
+// boton boletin 
+$('#btnEditar').click(function(){
+    console.log('editar');
+});

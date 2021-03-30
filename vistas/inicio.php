@@ -58,6 +58,7 @@
                                     <th scope="col"><i class="fa fa-briefcase"></i> &nbsp;Area</th>
                                     <th scope="col"><i class="fa fa-envelope"></i> &nbsp;Boletin</th>
                                     <th scope="col">Ver</th>
+                                    <th scope="col">Editar</th>
                                     <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
@@ -176,7 +177,7 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btnGuardar"  class="btn btn-primary">Guardar</button>
+                        <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -197,7 +198,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Nombre:</span>
                                 </div>
-                                <input type="text" id="verNombre" name="verNombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="verNombre" name="verNombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -206,7 +207,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Email:</span>
                                 </div>
-                                <input type="email" id="verEmail" name="verEmail" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="email" id="verEmail" name="verEmail" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             </div>
                         </div>
                     </div>
@@ -217,7 +218,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Sexo:</span>
                                 </div>
-                                <input type="text" id="verSexo" name="verSexo" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="verSexo" name="verSexo" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -226,7 +227,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Area:</span>
                                 </div>
-                                <input type="text" id="verArea" name="verArea" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="verArea" name="verArea" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -235,7 +236,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Recibe Boletin:</span>
                                 </div>
-                                <input type="text" id="verBoletin" name="verBoletin" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="verBoletin" name="verBoletin" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             </div>
                         </div>
                     </div>
@@ -244,21 +245,142 @@
                             <!-- descripcion  -->
                             <div class="input-group mb-3">
                                 <label for="" class="input-group-text">Descripcion: </label>
-                                <textarea name="verDescripcion" id="verDescripcion" rows="3" class="form-control"></textarea>
+                                <textarea name="verDescripcion" id="verDescripcion" rows="3" class="form-control" readonly></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <!-- descripcion  -->
+                            <!-- roles  -->
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Roles asignados:</span>
                                 </div>
-                                <input type="text" id="verRoles" name="verRoles" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="verRoles" name="verRoles" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Editar Empleado-->
+    <div class="modal fade" id="ModalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title  text-warning" id="exampleModalLabel">Editar Empleado</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="formularioEditar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- nombre  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Nombre:</span>
+                                    </div>
+                                    <input type="text" id="editNombre" name="editNombre" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- nombre  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Email:</span>
+                                    </div>
+                                    <input type="email" id="editEmail" name="editEmail" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- sexo  -->
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Sexo:</span>
+                                    </div>
+                                    <div class="form-control">
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" id="editSexoM" class="form-check-input optradio" value="M" name="sexo">Masculino
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" id="editSexoF" class="form-check-input optradio" value="F" name="sexo">Femenino
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- area  -->
+                            <div class="col-md-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Area:</span>
+                                    </div>
+                                    <select class="form-control" id="sltEditArea" name="sltEditArea">
+                                        <?php
+                                        foreach ($areas as $key => $value) {
+                                        ?>
+                                            <option name="<?php echo $value["nombre"] ?>" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- boletin  -->
+                            <div class="col-md-3">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Recibe Boletin:</span>
+                                    </div>
+                                    <div class="form-control">
+                                        <div class="custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="editBoletin">
+                                            <label class="custom-control-label" for="editBoletin" id="lblBoletin"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- descripcion  -->
+                            <div class="col-md-12">
+                                <div class="input-group mb-3">
+                                    <label for="" class="input-group-text">Descripcion: </label>
+                                    <textarea name="editDescripcion" id="editDescripcion" rows="3" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- descripcion  -->
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Roles:</span>
+                                    </div>
+                                        <ul class="list-group">
+                                            <?php
+                                            foreach ($roles as $key => $value) {
+                                            ?>
+                                                <li class="list-group-item">
+                                                    &nbsp;<input type="checkbox" id="editRoles<?php echo $value["id"] ?>" name='roles[]' class="form-check-input roles" value="<?php echo $value["id"] ?>"><?php echo $value["nombre"] ?>
+                                                </li>
+                                            <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="idEmpleado" value="">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnEditar" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             </div>
         </div>
