@@ -30,7 +30,7 @@
         <div class="centrar">
             <img src="vistas/img/bienvenido.svg" class="img-fluid" alt="bienvenida">
             <div>
-                <h2 class="text-center">Bienvenido</h2>
+                <h2 class="text-center">Bienvenid@</h2>
 
             </div>
         </div>
